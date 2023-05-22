@@ -1,10 +1,19 @@
+import Layout from '@/components/layout/Layout'
+import { Typography } from '@mui/material'
 import { NextPage } from 'next'
 import React from 'react'
 
-const Home : NextPage = () => {
+const HomePage : NextPage = () => {
   return (
-    <div>Home : NextPage</div>
+   <Layout>
+      <Typography 
+        variant='h3' 
+        color='primary'
+          >
+            HomePage -- NextPage
+      </Typography>
+   </Layout>
   )
 }
 
-export default Home
+export default HomePage
