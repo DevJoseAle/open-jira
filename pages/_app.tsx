@@ -3,20 +3,19 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { lightTheme, firstTheme } from '@/themes'
 import { UIProvider } from '@/context/ui'
+import { EntriesProvider } from '@/context/entries'
 
 
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-
-    <UIProvider>
-      <>
-        <ThemeProvider theme={firstTheme}>
-          <CssBaseline/>
-            <Component {...pageProps} />
-        </ThemeProvider>
-      </>
-  
-    </UIProvider>
+    <EntriesProvider>
+      <UIProvider>
+          <ThemeProvider theme={lightTheme}>
+            <CssBaseline/>
+              <Component {...pageProps} />
+          </ThemeProvider>
+      </UIProvider>
+    </EntriesProvider>
   )
 }
