@@ -9,3 +9,4 @@ export interface Entry {
 }
 
 export type EntryStatus = 'pending' | 'in-progress' | 'finished'
+//
