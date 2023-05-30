@@ -6,13 +6,15 @@ import  React from 'react';
 
 export interface UIState{ 
     sidemenuOpen : boolean,
-    isAddingEntry: boolean
+    isAddingEntry: boolean,
+    isDragging: boolean
 
 }
 
 const UI_INITIAL_STATE: UIState  = { 
     sidemenuOpen: false,
-    isAddingEntry: false
+    isAddingEntry: false,
+    isDragging: false
 }
 
 //Proveedor del state 
@@ -35,6 +37,13 @@ export const UIProvider:FC = ({children} : any ) => {
         dispatch({type: 'UI - Set IsAddingEntry', payload: isAdding})
     }
 
+    const startDragging = () =>{
+        dispatch({type: 'UI - Start Dragging'})
+    }
+    const endDragging = () =>{
+        dispatch({type: 'UI - End Dragging'})
+    }
+
   return (
     <UIContext.Provider value={{
         ...state,
@@ -43,7 +52,10 @@ export const UIProvider:FC = ({children} : any ) => {
         //Métodos
         openSideMenu,
         closeSideMenu, 
-        setIsAddingEntry
+        setIsAddingEntry,
+
+        startDragging,
+        endDragging
     }}> 
 
     {children}
