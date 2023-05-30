@@ -6,11 +6,13 @@ import  React from 'react';
 
 export interface UIState{ 
     sidemenuOpen : boolean,
+    isAddingEntry: boolean
 
 }
 
 const UI_INITIAL_STATE: UIState  = { 
     sidemenuOpen: false,
+    isAddingEntry: false
 }
 
 //Proveedor del state 
@@ -29,14 +31,19 @@ export const UIProvider:FC = ({children} : any ) => {
 
     }
 
+    const setIsAddingEntry =(isAdding: boolean) =>{
+        dispatch({type: 'UI - Set IsAddingEntry', payload: isAdding})
+    }
+
   return (
     <UIContext.Provider value={{
-        
+        ...state,
         sidemenuOpen: state.sidemenuOpen,
 
         //Métodos
         openSideMenu,
-        closeSideMenu
+        closeSideMenu, 
+        setIsAddingEntry
     }}> 
 
     {children}

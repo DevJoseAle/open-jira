@@ -1,7 +1,7 @@
 import { Paper, List } from '@mui/material'
 import { EntryCard } from './EntryCard'
-import { EntryStatus } from '@/interfaces'
-import { FC, useContext, useMemo } from 'react';
+import { Entry, EntryStatus } from '@/interfaces'
+import { DragEvent, FC, useContext, useMemo } from 'react';
 import { EntriesContext, EntriesProvider } from '@/context/entries';
 
 interface Props {
@@ -14,13 +14,21 @@ export const EntryList: FC<Props> = ({status}) => {
   const entriesByStatus = useMemo(() => entries.filter( entry => entry.status === status) ,[entries]) 
   
 
-
-
+  const onDropentry = (event:DragEvent<HTMLDivElement>) =>{
+    const id = event.dataTransfer.getData('text')
+    console.log({id})
+  } 
+  const allowDrop = (event: DragEvent<HTMLDivElement>) =>{
+     event.preventDefault()
+   }
 
   return (
 
     //TODO Aqui haremos drop
-    <div>
+    <div
+    onDrop={onDropentry}
+    onDragOver={ allowDrop }
+    >
         <Paper sx={{
             height: 'calc(100vh - 230px)',
             overflow: 'scroll',

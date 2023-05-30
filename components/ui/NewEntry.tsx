@@ -4,12 +4,14 @@ import MailOutlineOutlinedIcon from '@mui/icons-material/MailOutlineOutlined';
 import AddIcon from '@mui/icons-material/AddBoxOutlined';
 import { useContext } from 'react';
 import { EntriesContext } from '@/context/entries';
+import { UIContext } from '@/context/ui';
 
 
 export const NewEntry = () => {
 
-    const { addNewEntry, entries} = useContext(EntriesContext)
-    const [isAdding, setIsAdding] = useState(false);
+    const { addNewEntry} = useContext(EntriesContext)
+    const {isAddingEntry, setIsAddingEntry} = useContext(UIContext)
+
     const [inputValue, setInputValue] = useState('')
     const [touched, setTouched] = useState(false)
 
@@ -20,7 +22,7 @@ export const NewEntry = () => {
 
         if(inputValue.trim().length == 0) return;
         addNewEntry(inputValue);
-
+        setIsAddingEntry(false);
         setInputValue('');
         setTouched(false);
     }
@@ -33,7 +35,7 @@ export const NewEntry = () => {
         >
 
             {
-                isAdding 
+                isAddingEntry == true
                 ? 
                 (
                 <>
@@ -62,7 +64,7 @@ export const NewEntry = () => {
 
                 
                     <Button 
-                        onClick={() => setIsAdding(false)}
+                        onClick={() => setIsAddingEntry(false)}
                         variant='outlined' 
                         endIcon={<MailOutlineOutlinedIcon/>}>
                         Cancelar
@@ -85,7 +87,7 @@ export const NewEntry = () => {
                 (
                     <>
             <Button
-                onClick={ () => setIsAdding(true)}
+                onClick={ () => setIsAddingEntry(true)}
                 fullWidth
                 variant='contained'
                 startIcon={<AddIcon/>}>
